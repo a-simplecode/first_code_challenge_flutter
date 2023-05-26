@@ -1,3 +1,4 @@
+import 'package:first_code_challenge_flutter/nft_list.dart';
 import 'package:flutter/material.dart';
 
 const startAlignment = Alignment.topLeft;
@@ -23,7 +24,7 @@ class GradientContainer extends StatelessWidget {
               end: endAlignment),
         ),
         child: const Center(
-          child: Text("amine"),
+          child: NftList(),
         ));
   }
 }
