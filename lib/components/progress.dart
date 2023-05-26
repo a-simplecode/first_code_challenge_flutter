@@ -11,6 +11,5 @@ class Progress extends StatelessWidget {
         child: CircularProgressIndicator(),
       ),
     );
-    ;
   }
 }

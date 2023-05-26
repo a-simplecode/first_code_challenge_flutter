@@ -4,14 +4,14 @@ import 'package:first_code_challenge_flutter/components/progress.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class NftList extends StatefulWidget {
-  const NftList({super.key});
+class NftDetails extends StatefulWidget {
+  const NftDetails({super.key});
 
   @override
-  State<NftList> createState() => _NftListState();
+  State<NftDetails> createState() => _NftDetailsState();
 }
 
-class _NftListState extends State<NftList> {
+class _NftDetailsState extends State<NftDetails> {
   List<NFT> nfts = [];
   int currentPage = 1;
   bool isLoading = false;
@@ -51,7 +51,7 @@ class _NftListState extends State<NftList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('NFT List'),
+        title: const Text('NFT Details'),
       ),
       body: ListView.builder(
         itemCount: nfts.length + 1,
