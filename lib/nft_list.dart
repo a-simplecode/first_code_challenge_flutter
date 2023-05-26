@@ -16,11 +16,25 @@ class _NftListState extends State<NftList> {
   int currentPage = 1;
   bool isLoading = false;
   static const int perPage = 10;
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
     loadNFTs();
+
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        loadNFTs();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   Future<void> loadNFTs() async {
@@ -51,9 +65,10 @@ class _NftListState extends State<NftList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('NFT List'),
+        title: const Text('NFT LIST'),
       ),
       body: ListView.builder(
+        controller: _scrollController,
         itemCount: nfts.length + 1,
         itemBuilder: (BuildContext context, int index) {
           if (index == nfts.length) {

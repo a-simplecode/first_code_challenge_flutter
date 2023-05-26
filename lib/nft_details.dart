@@ -49,7 +49,7 @@ class _NftDetailsState extends State<NftDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('NFT Details'),
+        title: isLoading ? const Text("NFT DETAILS") : Text(nft.name),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -62,15 +62,6 @@ class _NftDetailsState extends State<NftDetails> {
                       nft.imageUrl.replaceAll("small", "large"),
                       width: double.infinity,
                       fit: BoxFit.cover,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: Text(
-                        nft.name,
-                        style: const TextStyle(
-                          fontSize: 24,
-                        ),
-                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(15),
