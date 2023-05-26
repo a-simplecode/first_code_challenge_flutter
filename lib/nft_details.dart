@@ -63,16 +63,22 @@ class _NftDetailsState extends State<NftDetails> {
                       width: double.infinity,
                       fit: BoxFit.cover,
                     ),
-                    Text(
-                      nft.name,
-                      style: const TextStyle(
-                        fontSize: 24,
+                    Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: Text(
+                        nft.name,
+                        style: const TextStyle(
+                          fontSize: 24,
+                        ),
                       ),
                     ),
-                    Text(
-                      nft.description,
-                      style: const TextStyle(
-                        fontSize: 18,
+                    Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: Text(
+                        nft.description,
+                        style: const TextStyle(
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ],
