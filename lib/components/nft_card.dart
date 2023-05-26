@@ -26,7 +26,10 @@ class NftCard extends StatelessWidget {
       child: Card(
         child: ListTile(
           // leading: Image.network(imageUrl),
-          leading: Text(imageUrl),
+          leading: Text(
+            imageUrl,
+            style: const TextStyle(fontSize: 35),
+          ),
           title: Text(name),
           subtitle: Text('Price: \$$price'),
         ),
