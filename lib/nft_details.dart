@@ -51,8 +51,33 @@ class _NftDetailsState extends State<NftDetails> {
       appBar: AppBar(
         title: const Text('NFT Details'),
       ),
-      body: Container(
-        child: isLoading ? const Progress() : Text(nft.name),
+      body: SingleChildScrollView(
+        child: Container(
+          child: isLoading
+              ? const Progress()
+              : Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Image.network(
+                      nft.imageUrl.replaceAll("small", "large"),
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                    Text(
+                      nft.name,
+                      style: const TextStyle(
+                        fontSize: 24,
+                      ),
+                    ),
+                    Text(
+                      nft.description,
+                      style: const TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
+                ),
+        ),
       ),
     );
   }
@@ -62,14 +87,19 @@ class NFT {
   final String imageUrl;
   final String name;
   final String price;
+  final String description;
 
-  NFT({required this.imageUrl, required this.name, required this.price});
+  NFT(
+      {required this.imageUrl,
+      required this.name,
+      required this.price,
+      required this.description});
 
   factory NFT.fromJson(Map<String, dynamic> json) {
     return NFT(
-      imageUrl: json['symbol'],
-      name: json['name'],
-      price: json['asset_platform_id'],
-    );
+        imageUrl: json['image']['small'],
+        name: json['name'],
+        price: json['asset_platform_id'],
+        description: json['description']);
   }
 }
