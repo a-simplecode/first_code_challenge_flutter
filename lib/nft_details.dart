@@ -1,21 +1,20 @@
 import 'dart:convert';
-import 'package:first_code_challenge_flutter/components/nft_card.dart';
 import 'package:first_code_challenge_flutter/components/progress.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class NftDetails extends StatefulWidget {
-  const NftDetails({super.key});
+  const NftDetails({super.key, required this.id});
+
+  final String id;
 
   @override
   State<NftDetails> createState() => _NftDetailsState();
 }
 
 class _NftDetailsState extends State<NftDetails> {
-  List<NFT> nfts = [];
-  int currentPage = 1;
+  late NFT nft;
   bool isLoading = false;
-  static const int perPage = 10;
 
   @override
   void initState() {
@@ -29,14 +28,13 @@ class _NftDetailsState extends State<NftDetails> {
       isLoading = true;
     });
 
-    final response = await http.get(Uri.parse(
-        'https://api.coingecko.com/api/v3/nfts/list?per_page=$perPage&page=$currentPage'));
+    final response = await http
+        .get(Uri.parse('https://api.coingecko.com/api/v3/nfts/${widget.id}'));
     if (response.statusCode == 200) {
-      final List<dynamic> data = jsonDecode(response.body);
+      final Map<String, dynamic> data = jsonDecode(response.body);
 
       setState(() {
-        nfts.addAll(data.map((item) => NFT.fromJson(item)).toList());
-        currentPage++;
+        nft = NFT.fromJson(data);
         isLoading = false;
       });
     } else {
@@ -53,17 +51,8 @@ class _NftDetailsState extends State<NftDetails> {
       appBar: AppBar(
         title: const Text('NFT Details'),
       ),
-      body: ListView.builder(
-        itemCount: nfts.length + 1,
-        itemBuilder: (BuildContext context, int index) {
-          if (index == nfts.length) {
-            return const Progress();
-          } else {
-            final NFT nft = nfts[index];
-            return NftCard(
-                imageUrl: nft.imageUrl, name: nft.name, price: nft.price);
-          }
-        },
+      body: Container(
+        child: isLoading ? const Progress() : Text(nft.name),
       ),
     );
   }

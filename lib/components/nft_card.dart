@@ -6,8 +6,10 @@ class NftCard extends StatelessWidget {
       {super.key,
       required this.imageUrl,
       required this.name,
-      required this.price});
+      required this.price,
+      required this.id});
 
+  final String id;
   final String imageUrl;
   final String name;
   final String price;
@@ -18,7 +20,7 @@ class NftCard extends StatelessWidget {
       onTap: () => {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const NftDetails()),
+          MaterialPageRoute(builder: (context) => NftDetails(id: id)),
         )
       },
       child: Card(

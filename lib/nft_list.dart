@@ -61,7 +61,10 @@ class _NftListState extends State<NftList> {
           } else {
             final NFT nft = nfts[index];
             return NftCard(
-                imageUrl: nft.imageUrl, name: nft.name, price: nft.price);
+                imageUrl: nft.imageUrl,
+                name: nft.name,
+                price: nft.price,
+                id: nft.id);
           }
         },
       ),
@@ -73,14 +76,19 @@ class NFT {
   final String imageUrl;
   final String name;
   final String price;
+  final String id;
 
-  NFT({required this.imageUrl, required this.name, required this.price});
+  NFT(
+      {required this.imageUrl,
+      required this.name,
+      required this.price,
+      required this.id});
 
   factory NFT.fromJson(Map<String, dynamic> json) {
     return NFT(
-      imageUrl: json['symbol'],
-      name: json['name'],
-      price: json['asset_platform_id'],
-    );
+        imageUrl: json['symbol'],
+        name: json['name'],
+        price: json['asset_platform_id'],
+        id: json['id']);
   }
 }
